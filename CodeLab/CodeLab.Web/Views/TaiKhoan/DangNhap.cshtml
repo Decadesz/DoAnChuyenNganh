@@ -1,0 +1,17 @@
+@model LoginInput
+<div class="editor">
+<h1>Đăng nhập</h1>
+<form method="post" asp-action="DangNhap">
+<div asp-validation-summary="All">
+</div> <input asp-for="ReturnUrl" type="hidden" />
+<label asp-for="Email">Email</label>
+<input class="form-control" asp-for="Email" />
+<span asp-validation-for="Email">
+</span>
+<label asp-for="Password">Mật khẩu</label>
+<input class="form-control" asp-for="Password" />
+<span asp-validation-for="Password">
+</span>
+<button class="btn btn-primary mt-4">Đăng nhập</button>
+</form>
+</div>

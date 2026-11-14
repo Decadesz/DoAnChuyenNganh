@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>@(ViewData["Title"] ?? "Khóa học lập trình") · CodeLab</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<header><nav class="container d-flex flex-wrap align-items-center gap-3 py-3">
+<a class="brand" asp-controller="Home" asp-action="Index">&lt;/&gt; CodeLab</a>
+<a asp-controller="Home" asp-action="Index">Khóa học</a>
+@if(User.Identity?.IsAuthenticated == true)
+{
+    @if(User.IsInRole("Admin"))
+    {
+        <a asp-controller="QuanTri" asp-action="TaiKhoan">Quản lý học viên</a>
+    }
+    <a asp-controller="TaiKhoan" asp-action="DoiMatKhau">Đổi mật khẩu</a>
+    <form class="ms-auto" method="post" asp-controller="TaiKhoan" asp-action="DangXuat">
+        <span class="me-2">@User.Identity.Name</span><button class="btn btn-outline-secondary btn-sm">Đăng xuất</button>
+    </form>
+}
+else
+{
+    <a class="ms-auto" asp-controller="TaiKhoan" asp-action="DangNhap">Đăng nhập</a>
+    <a class="btn btn-primary" asp-controller="TaiKhoan" asp-action="DangKy">Đăng ký</a>
+}
+</nav></header>
+<main class="container py-4">
+@if(TempData["Message"] is string message) { <div class="alert alert-info" role="status">@message</div> }
+@RenderBody()
+</main>
+<footer class="container py-4 text-muted border-top">CodeLab · Khám phá lộ trình học lập trình.</footer>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@await RenderSectionAsync("Scripts", required:false)
+</body></html>

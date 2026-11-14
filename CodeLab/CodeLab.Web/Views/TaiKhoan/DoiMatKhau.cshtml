@@ -1,0 +1,14 @@
+@model ChangePasswordInput
+<div class="editor">
+<h1>Đổi mật khẩu</h1>
+<form method="post" asp-action="DoiMatKhau">
+<div asp-validation-summary="All"></div>
+<label asp-for="OldPassword">Mật khẩu hiện tại</label>
+<input class="form-control" asp-for="OldPassword" autocomplete="current-password" />
+<label asp-for="NewPassword">Mật khẩu mới</label>
+<input class="form-control" asp-for="NewPassword" autocomplete="new-password" />
+<label asp-for="ConfirmPassword">Nhập lại mật khẩu mới</label>
+<input class="form-control" asp-for="ConfirmPassword" autocomplete="new-password" />
+<button class="btn btn-primary mt-4">Lưu mật khẩu</button>
+</form>
+</div>

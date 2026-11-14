@@ -1,0 +1,25 @@
+@model RegisterInput
+<div class="editor">
+<h1>Đăng ký</h1>
+<form method="post" asp-action="DangKy">
+<div asp-validation-summary="All">
+</div>
+<label asp-for="HoTen">Họ tên</label>
+<input class="form-control" asp-for="HoTen" />
+<span asp-validation-for="HoTen">
+</span>
+<label asp-for="Email">Email</label>
+<input class="form-control" asp-for="Email" />
+<span asp-validation-for="Email">
+</span>
+<label asp-for="Password">Mật khẩu</label>
+<input class="form-control" asp-for="Password" />
+<span asp-validation-for="Password">
+</span>
+<label asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
+<input class="form-control" asp-for="ConfirmPassword" />
+<span asp-validation-for="ConfirmPassword">
+</span>
+<button class="btn btn-primary mt-4">Đăng ký</button>
+</form>
+</div>

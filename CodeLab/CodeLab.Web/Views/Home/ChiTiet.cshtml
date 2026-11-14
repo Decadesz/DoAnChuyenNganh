@@ -1,0 +1,25 @@
+@model CoursePage
+@{ ViewData["Title"] = Model.Course.TenKhoaHoc; }
+<h1>@Model.Course.TenKhoaHoc</h1>
+<p>@Model.Course.MoTaNgan</p>
+@if(!string.IsNullOrWhiteSpace(Model.Course.MoTaChiTiet))
+{
+    <div class="lesson">@Model.Course.MoTaChiTiet</div>
+}
+<p class="mt-3">Trình độ: @Model.Course.TrinhDo</p>
+<p>Học phí: <strong>@Model.Course.HocPhi.ToString("N0") đ</strong></p>
+<h2>Lộ trình khóa học</h2>
+@if(Model.Chapters.Count == 0) { <p>Lộ trình đang được cập nhật.</p> }
+@foreach(var chapter in Model.Chapters)
+{
+    <section class="card p-3 my-3">
+        <h3>@chapter.ThuTu. @chapter.TenChuong</h3>
+        <ol>
+        @foreach(var lesson in Model.Lessons.Where(x => x.MaChuong == chapter.MaChuong))
+        {
+            <li>@lesson.TenBaiGiang</li>
+        }
+        </ol>
+    </section>
+}
+<a asp-action="Index">Về danh sách khóa học</a>

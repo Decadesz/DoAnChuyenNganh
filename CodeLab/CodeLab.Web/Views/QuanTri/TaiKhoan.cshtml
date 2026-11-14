@@ -1,0 +1,6 @@
+@model List<ApplicationUser>
+<h1>Tra cứu học viên</h1>
+<form method="get" class="d-flex gap-2 mb-3"><input name="q" class="form-control" placeholder="Tên hoặc email học viên" value="@Context.Request.Query["q"]" /><button class="btn btn-primary">Tìm</button><a class="btn btn-light" asp-action="TaiKhoan">Tất cả</a></form>
+<table class="table"><thead><tr><th>Họ tên</th><th>Email</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+@foreach(var row in Model){<tr><td>@row.HoTen</td><td>@row.Email</td><td>@(row.DaKhoa?"Đã khóa":"Hoạt động")</td><td><form method="post" asp-action="Khoa" asp-route-id="@row.Id"><button class="btn btn-outline-secondary">@(row.DaKhoa?"Mở khóa":"Khóa")</button></form></td></tr>}
+</tbody></table>
