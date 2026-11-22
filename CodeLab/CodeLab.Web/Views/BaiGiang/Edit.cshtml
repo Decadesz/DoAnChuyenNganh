@@ -1,68 +1,122 @@
 @model BaiGiangInput
 <div class="editor">
-<h1>@(Model.MaBaiGiang==0 ? "Thêm" : "Sửa") bài giảng</h1>
-<form method="post" asp-action="Edit" asp-route-id="@Model.MaBaiGiang">
-<div asp-validation-summary="All">
-</div>
-<input type="hidden" asp-for="MaBaiGiang" />
-@* Gửi mã phiên bản của bài để EF Core phát hiện khi bài đã được người khác cập nhật. *@
-<input type="hidden" asp-for="Version" />
-<div>
-<label asp-for="MaChuong"></label>
-<select class="form-select" asp-for="MaChuong" asp-items="ViewBag.Chapters">
-<option value="">-- Chọn --</option>
-</select>
-<span asp-validation-for="MaChuong">
-</span>
-</div>
-<div>
-<label asp-for="MaKhoaHoc"></label>
-<select class="form-select" asp-for="MaKhoaHoc" asp-items="ViewBag.Courses">
-<option value="">-- Chọn --</option>
-</select>
-<span asp-validation-for="MaKhoaHoc">
-</span>
-</div>
-<div>
-<label asp-for="TenBaiGiang"></label>
-<input class="form-control" asp-for="TenBaiGiang" />
-<span asp-validation-for="TenBaiGiang">
-</span>
-</div>
-<div>
-<label asp-for="NoiDung"></label>
+    <h1>@(Model.MaBaiGiang == 0 ? "Thêm" : "Sửa") bài giảng</h1>
+    <form method="post" asp-action="Edit" asp-route-id="@Model.MaBaiGiang">
+        <div asp-validation-summary="All">
+        </div>
+        <input type="hidden" asp-for="MaBaiGiang" />
+        @* Gửi mã phiên bản của bài để EF Core phát hiện khi bài đã được người khác cập nhật. *@
+        <input type="hidden" asp-for="Version" />
+        @{
+            var dangSua = Model.MaBaiGiang != 0;
+            var chuaChonKhoa = Model.MaKhoaHoc <= 0;
+        }
+
+        <div>
+            <label asp-for="MaKhoaHoc"></label>
+            <select asp-for="MaKhoaHoc" asp-items="ViewBag.Courses" class="form-select" disabled="@dangSua">
+                <option value="">-- Chọn khóa học --</option>
+            </select>
+            <span asp-validation-for="MaKhoaHoc"></span>
+        </div>
+
+        <div>
+            <label asp-for="MaChuong"></label>
+            <select asp-for="MaChuong" asp-items="ViewBag.Chapters"
+                    class="form-select" disabled="@(dangSua || chuaChonKhoa)" data-url="@Url.Action("LayChuongTheoKhoa", "BaiGiang")">
+                <option value="">@(chuaChonKhoa ? "-- Chọn khóa học trước --" : "-- Chọn chương học --")</option>
+            </select>
+            <span asp-validation-for="MaChuong"></span>
+        </div>
+
+        @if (dangSua)
+        {  @* Ô bị disabled không gửi dữ liệu khi submit, nên gửi hai mã bằng ô ẩn. *@
+            <input asp-for="MaKhoaHoc" type="hidden" id="MaKhoaHocAn" />
+            <input asp-for="MaChuong" type="hidden" id="MaChuongAn" />
+        }
+        <div>
+            <label asp-for="TenBaiGiang"></label>
+            <input class="form-control" asp-for="TenBaiGiang" />
+            <span asp-validation-for="TenBaiGiang">
+            </span>
+        </div>
+        <div>
+            <label asp-for="NoiDung"></label>
 <textarea rows="6" class="form-control" asp-for="NoiDung">
 </textarea>
-<span asp-validation-for="NoiDung">
-</span>
+            <span asp-validation-for="NoiDung">
+            </span>
+        </div>
+        <div>
+            <label asp-for="DuongDanVideo"></label>
+            <input class="form-control" asp-for="DuongDanVideo" />
+            <span asp-validation-for="DuongDanVideo">
+            </span>
+        </div>
+        <div>
+            <label asp-for="HocThu"></label> <input class="form-check-input" asp-for="HocThu" />
+            <span asp-validation-for="HocThu">
+            </span>
+        </div>
+        <div>
+            <label asp-for="BatBuoc"></label> <input class="form-check-input" asp-for="BatBuoc" />
+            <span asp-validation-for="BatBuoc">
+            </span>
+        </div>
+        <div>
+            <label asp-for="HienThi"></label> <input class="form-check-input" asp-for="HienThi" />
+            <span asp-validation-for="HienThi">
+            </span>
+        </div>
+        <div>
+            <label asp-for="ThuTu"></label>
+            <input class="form-control" asp-for="ThuTu" />
+            <span asp-validation-for="ThuTu">
+            </span>
+        </div>
+        <button class="btn btn-primary mt-4">Lưu</button> <a asp-action="Index" class="btn btn-outline-secondary mt-4">Quay lại</a>
+    </form>
 </div>
-<div>
-<label asp-for="DuongDanVideo"></label>
-<input class="form-control" asp-for="DuongDanVideo" />
-<span asp-validation-for="DuongDanVideo">
-</span>
-</div>
-<div>
-<label asp-for="HocThu"></label> <input class="form-check-input" asp-for="HocThu" />
-<span asp-validation-for="HocThu">
-</span>
-</div>
-<div>
-<label asp-for="BatBuoc"></label> <input class="form-check-input" asp-for="BatBuoc" />
-<span asp-validation-for="BatBuoc">
-</span>
-</div>
-<div>
-<label asp-for="HienThi"></label> <input class="form-check-input" asp-for="HienThi" />
-<span asp-validation-for="HienThi">
-</span>
-</div>
-<div>
-<label asp-for="ThuTu"></label>
-<input class="form-control" asp-for="ThuTu" />
-<span asp-validation-for="ThuTu">
-</span>
-</div>
-<button class="btn btn-primary mt-4">Lưu</button> <a asp-action="Index" class="btn btn-outline-secondary mt-4">Quay lại</a>
-</form>
-</div>
+<script>
+    const oKhoaHoc = document.getElementById("MaKhoaHoc");
+    const oChuong = document.getElementById("MaChuong");
+
+    oKhoaHoc.addEventListener("change", async function () {
+        const maKhoaHoc = oKhoaHoc.value;
+
+        // Bỏ chương đã chọn ngay khi đổi khóa.
+        oChuong.disabled = true;
+        oChuong.replaceChildren(new Option(
+            maKhoaHoc ? "-- Đang tải chương --" : "-- Chọn khóa học trước --", ""
+        ));
+
+        if (!maKhoaHoc) return;
+
+        try {
+            const url = new URL(oChuong.dataset.url, window.location.origin);
+            url.searchParams.set("maKhoaHoc", maKhoaHoc);
+
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Không tải được danh sách chương.");
+
+            const danhSach = await response.json();
+
+            // Bỏ kết quả cũ nếu người dùng đã chọn sang khóa khác.
+            if (oKhoaHoc.value !== maKhoaHoc) return;
+
+            oChuong.replaceChildren(new Option(
+                danhSach.length ? "-- Chọn chương học --" : "-- Khóa này chưa có chương --", ""
+            ));
+
+            for (const chuong of danhSach) {
+                oChuong.add(new Option(chuong.tenChuong, chuong.maChuong));
+            }
+
+            oChuong.disabled = danhSach.length === 0;
+        } catch {
+            if (oKhoaHoc.value === maKhoaHoc) {
+                oChuong.replaceChildren(new Option("-- Không tải được chương --", ""));
+            }
+        }
+    });
+</script>

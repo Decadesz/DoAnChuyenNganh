@@ -44,18 +44,23 @@ public class BaiGiangController : Controller
     }
     public async Task<IActionResult> Edit(int id = 0)
     {
-        await Lists();
         if (id == 0)
+        {
+            await Lists();
             return View(new BaiGiangInput());
+        }
+
         var row = await db.BaiGiang.FindAsync(id);
         if (row == null)
             return NotFound();
+
+        await Lists(row.MaKhoaHoc);
         return View(new BaiGiangInput { MaBaiGiang = row.MaBaiGiang, MaChuong = row.MaChuong, MaKhoaHoc = row.MaKhoaHoc, TenBaiGiang = row.TenBaiGiang, NoiDung = row.NoiDung, DuongDanVideo = row.DuongDanVideo, HocThu = row.HocThu, BatBuoc = row.BatBuoc, HienThi = row.HienThi, ThuTu = row.ThuTu, Version = Convert.ToBase64String(row.RowVersion) });
     }
     [HttpPost]
     public async Task<IActionResult> Edit(int id, BaiGiangInput input)
     {
-        await Lists();
+        await Lists(input.MaKhoaHoc);
         if (id != input.MaBaiGiang)
             return BadRequest();
         if (!ModelState.IsValid)
@@ -132,9 +137,29 @@ public class BaiGiangController : Controller
         catch (DbUpdateException) { ModelState.AddModelError("", "Không lưu được: kiểm tra mã liên kết, thứ tự trùng hoặc ràng buộc dữ liệu."); }
         return View(input);
     }
-    private async Task Lists()
+    private async Task Lists(int maKhoaHoc = 0)
     {
-        ViewBag.Courses = new SelectList(await db.KhoaHoc.AsNoTracking().ToListAsync(), "MaKhoaHoc", "TenKhoaHoc");
-        ViewBag.Chapters = new SelectList(await db.ChuongHoc.AsNoTracking().Select(x => new { x.MaChuong, Label = x.MaKhoaHoc + " / " + x.TenChuong }).ToListAsync(), "MaChuong", "Label");
+        var khoaHoc = await db.KhoaHoc.AsNoTracking()
+            .OrderBy(k => k.TenKhoaHoc)
+            .ToListAsync();
+
+        var chuongHoc = await db.ChuongHoc.AsNoTracking()
+            .Where(c => c.MaKhoaHoc == maKhoaHoc)
+            .OrderBy(c => c.ThuTu)
+            .ToListAsync();
+
+        ViewBag.Courses = new SelectList(khoaHoc, "MaKhoaHoc", "TenKhoaHoc");
+        ViewBag.Chapters = new SelectList(chuongHoc, "MaChuong", "TenChuong");
+    }
+    [HttpGet]
+    public async Task<IActionResult> LayChuongTheoKhoa(int maKhoaHoc)
+    {
+        var chuongHoc = await db.ChuongHoc.AsNoTracking()
+            .Where(c => c.MaKhoaHoc == maKhoaHoc)
+            .OrderBy(c => c.ThuTu)
+            .Select(c => new { maChuong = c.MaChuong, tenChuong = c.TenChuong })
+            .ToListAsync();
+
+        return Json(chuongHoc);
     }
 }
