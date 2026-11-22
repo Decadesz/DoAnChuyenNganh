@@ -9,6 +9,7 @@ public static class AdminSeed
         var password = config["SeedAdmin:Password"];
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
             return;
+        // Tạo phạm vi để dùng UserManager và RoleManager khi ứng dụng khởi động.
         using var scope = services.CreateScope();
         var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var roles = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -19,6 +20,7 @@ public static class AdminSeed
                 if (!r.Succeeded)
                     throw new InvalidOperationException("Không tạo được vai trò.");
             }
+        // Dùng email để kiểm tra lần chạy trước đã tạo tài khoản hay chưa.
         var existing = await users.FindByEmailAsync(email);
         if (existing != null)
         {
@@ -30,6 +32,7 @@ public static class AdminSeed
         var result = await users.CreateAsync(u, password);
         if (!result.Succeeded)
             throw new InvalidOperationException(string.Join("; ", result.Errors.Select(e => e.Description)));
+        // Gán vai trò Admin cho tài khoản vừa tạo. Nếu gán thất bại, dọn tài khoản mới.
         var added = await users.AddToRoleAsync(u, "Admin");
         if (!added.Succeeded)
         {

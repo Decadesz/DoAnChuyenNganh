@@ -1,0 +1,20 @@
+@model KhoaHocInput
+@{ var isEdit = Model.MaKhoaHoc > 0; ViewData["Title"] = isEdit ? "Sửa khóa học" : "Thêm khóa học"; }
+<h1>@ViewData["Title"]</h1>
+<form method="post" asp-action="@(isEdit ? "Edit" : "Create")" asp-route-id="@(isEdit ? Model.MaKhoaHoc : (int?)null)" class="editor">
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+    <input type="hidden" asp-for="MaKhoaHoc" />
+    @* Giữ phiên bản lúc mở form trong ô ẩn để đối chiếu khi lưu. *@
+    <input type="hidden" asp-for="RowVersion" />
+    <div class="mb-3"><label asp-for="TenKhoaHoc" class="form-label"></label><input asp-for="TenKhoaHoc" class="form-control" maxlength="150" /><span asp-validation-for="TenKhoaHoc" class="text-danger"></span></div>
+    <div class="row">
+    <div class="col-md-6 mb-3"><label asp-for="MaNgonNgu" class="form-label"></label><select asp-for="MaNgonNgu" asp-items="ViewBag.Languages" class="form-select"><option value="0">-- Chọn ngôn ngữ --</option></select><span asp-validation-for="MaNgonNgu" class="text-danger"></span></div>
+    <div class="col-md-6 mb-3"><label asp-for="TrinhDo" class="form-label"></label><select asp-for="TrinhDo" class="form-select"><option>Nền tảng</option><option>Cơ bản</option><option>Nâng cao</option></select></div>
+    </div>
+    <div class="mb-3"><label asp-for="HocPhi" class="form-label"></label><input asp-for="HocPhi" type="number" min="0" max="999999999999999999" step="1" class="form-control" /><small class="text-muted">Nhập số nguyên, ví dụ 150000. Nhập 0 nếu miễn phí.</small><span asp-validation-for="HocPhi" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="MoTaNgan" class="form-label"></label><textarea asp-for="MoTaNgan" class="form-control" rows="3" maxlength="500"></textarea></div>
+    <div class="mb-3"><label asp-for="MoTaChiTiet" class="form-label"></label><textarea asp-for="MoTaChiTiet" class="form-control" rows="8" maxlength="30000"></textarea><small class="text-muted">Nhập văn bản thường; xuống dòng để chia đoạn.</small></div>
+    <div class="mb-3"><label asp-for="HinhDaiDien" class="form-label"></label><input asp-for="HinhDaiDien" type="url" class="form-control" maxlength="500" placeholder="https://..." /><span asp-validation-for="HinhDaiDien" class="text-danger"></span></div>
+    @if(!isEdit) { <p class="text-muted">Khóa học mới được lưu ở trạng thái ẩn, chưa mở bán.</p> }
+    <div><button class="btn btn-primary">Lưu thông tin</button> <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a></div>
+</form>

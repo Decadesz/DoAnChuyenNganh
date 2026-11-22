@@ -1,0 +1,69 @@
+{
+  "Files": [
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
+    },
+    {
+      "Id": "G:\\BanThuNghiem\\27.11\\Ban2_ChinhLaiViewChoDep\\CodeLab_Lab2711\\CodeLab.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.CodeLab.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.CodeLab.Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.CodeLab.Web.props",
+      "PackagePath": "build\\CodeLab.Web.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CodeLab.Web.props",
+      "PackagePath": "buildMultiTargeting\\CodeLab.Web.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.CodeLab.Web.props",
+      "PackagePath": "buildTransitive\\CodeLab.Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

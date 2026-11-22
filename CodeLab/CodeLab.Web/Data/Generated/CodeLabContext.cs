@@ -1,111 +1,117 @@
-﻿using System;
-using System.Collections.Generic;
-using CodeLab.Web.Models;
 using Microsoft.EntityFrameworkCore;
-
+using CodeLab.Web.Models;
 namespace CodeLab.Web.Data;
-
-public partial class CodeLabContext : DbContext
+// Ánh xạ từ script SQL đính kèm; có thể thay bằng Scaffold theo hướng dẫn.
+// Constructor nhận cấu hình kết nối từ Program.cs. Các DbSet bên dưới tương ứng với bảng SQL.
+public partial class CodeLabContext(DbContextOptions<CodeLabContext> options) : DbContext(options)
 {
-    public CodeLabContext(DbContextOptions<CodeLabContext> options)
-        : base(options)
+    public virtual DbSet<NgonNguLapTrinh> NgonNguLapTrinh { get; set; } = null!;
+    public virtual DbSet<KhoaHoc> KhoaHoc { get; set; } = null!;
+    public virtual DbSet<ChuongHoc> ChuongHoc { get; set; } = null!;
+    public virtual DbSet<BaiGiang> BaiGiang { get; set; } = null!;
+    public virtual DbSet<TaiLieu> TaiLieu { get; set; } = null!;
+    public virtual DbSet<QuyenHoc> QuyenHoc { get; set; } = null!;
+    public virtual DbSet<HoanThanhBaiGiang> HoanThanhBaiGiang { get; set; } = null!;
+    protected override void OnModelCreating(ModelBuilder b)
     {
+        b.Entity<NgonNguLapTrinh>(e =>
+        {
+            e.ToTable("NgonNguLapTrinh", "dbo");
+            e.HasKey(x => new { x.MaNgonNgu });
+            e.Property(x => x.MaNgonNgu).HasColumnType("int").IsRequired().ValueGeneratedOnAdd();
+            e.Property(x => x.TenNgonNgu).HasColumnType("nvarchar(50)").IsRequired();
+            e.Property(x => x.MaJDoodle).HasColumnType("varchar(30)").IsRequired();
+            e.Property(x => x.PhienBanJDoodle).HasColumnType("int").IsRequired();
+            e.Property(x => x.DangHoatDong).HasColumnType("bit").IsRequired();
+        });
+        b.Entity<KhoaHoc>(e =>
+        {
+            e.ToTable("KhoaHoc", "dbo");
+            e.HasKey(x => new { x.MaKhoaHoc });
+            e.Property(x => x.MaKhoaHoc).HasColumnType("int").IsRequired().ValueGeneratedOnAdd();
+            e.Property(x => x.MaNgonNgu).HasColumnType("int").IsRequired();
+            e.Property(x => x.TenKhoaHoc).HasColumnType("nvarchar(150)").IsRequired();
+            e.Property(x => x.MoTaNgan).HasColumnType("nvarchar(500)").IsRequired();
+            e.Property(x => x.MoTaChiTiet).HasColumnType("nvarchar(max)");
+            e.Property(x => x.HocPhi).HasColumnType("decimal(18,0)").IsRequired();
+            e.Property(x => x.TrinhDo).HasColumnType("nvarchar(30)").IsRequired();
+            e.Property(x => x.HinhDaiDien).HasColumnType("nvarchar(500)");
+            e.Property(x => x.HienThi).HasColumnType("bit").IsRequired();
+            e.Property(x => x.MoBan).HasColumnType("bit").IsRequired();
+            e.Property(x => x.NguoiTaoId).HasColumnType("nvarchar(128)");
+            e.Property(x => x.NgayTao).HasColumnType("datetime2").IsRequired();
+            e.Property(x => x.NgayCapNhat).HasColumnType("datetime2");
+            // Khai báo cột phiên bản do SQL Server cấp để EF Core so sánh khi cập nhật.
+            e.Property(x => x.RowVersion).HasColumnType("rowversion").IsRequired().IsRowVersion();
+        });
+        b.Entity<ChuongHoc>(e =>
+        {
+            e.ToTable("ChuongHoc", "dbo");
+            e.HasKey(x => new { x.MaChuong });
+            e.Property(x => x.MaChuong).HasColumnType("int").IsRequired().ValueGeneratedOnAdd();
+            e.Property(x => x.MaKhoaHoc).HasColumnType("int").IsRequired();
+            e.Property(x => x.TenChuong).HasColumnType("nvarchar(150)").IsRequired();
+            e.Property(x => x.ThuTu).HasColumnType("int").IsRequired();
+        });
+        b.Entity<BaiGiang>(e =>
+        {
+            e.ToTable("BaiGiang", "dbo");
+            e.HasKey(x => new { x.MaBaiGiang });
+            e.Property(x => x.MaBaiGiang).HasColumnType("int").IsRequired().ValueGeneratedOnAdd();
+            e.Property(x => x.MaChuong).HasColumnType("int").IsRequired();
+            e.Property(x => x.MaKhoaHoc).HasColumnType("int").IsRequired();
+            e.Property(x => x.TenBaiGiang).HasColumnType("nvarchar(150)").IsRequired();
+            e.Property(x => x.NoiDung).HasColumnType("nvarchar(max)").IsRequired();
+            e.Property(x => x.DuongDanVideo).HasColumnType("nvarchar(500)");
+            e.Property(x => x.HocThu).HasColumnType("bit").IsRequired();
+            e.Property(x => x.BatBuoc).HasColumnType("bit").IsRequired();
+            e.Property(x => x.HienThi).HasColumnType("bit").IsRequired();
+            e.Property(x => x.ThuTu).HasColumnType("int").IsRequired();
+            e.Property(x => x.NgayTao).HasColumnType("datetime2").IsRequired();
+            e.Property(x => x.NgayCapNhat).HasColumnType("datetime2");
+            // Khai báo cột phiên bản do SQL Server cấp để EF Core so sánh khi cập nhật.
+            e.Property(x => x.RowVersion).HasColumnType("rowversion").IsRequired().IsRowVersion();
+        });
+        b.Entity<TaiLieu>(e =>
+        {
+            e.ToTable("TaiLieu", "dbo");
+            e.HasKey(x => new { x.MaTaiLieu });
+            e.Property(x => x.MaTaiLieu).HasColumnType("int").IsRequired().ValueGeneratedOnAdd();
+            e.Property(x => x.MaBaiGiang).HasColumnType("int").IsRequired();
+            e.Property(x => x.TenTaiLieu).HasColumnType("nvarchar(150)").IsRequired();
+            e.Property(x => x.TenTepGoc).HasColumnType("nvarchar(260)").IsRequired();
+            e.Property(x => x.DuongDanLuu).HasColumnType("nvarchar(500)").IsRequired();
+            e.Property(x => x.LoaiTep).HasColumnType("nvarchar(100)");
+            e.Property(x => x.KichThuocBytes).HasColumnType("bigint").IsRequired();
+            e.Property(x => x.NgayTaiLen).HasColumnType("datetime2").IsRequired();
+        });
+        b.Entity<QuyenHoc>(e =>
+        {
+            e.ToTable("QuyenHoc", "dbo");
+            e.HasKey(x => new { x.MaQuyenHoc });
+            e.Property(x => x.MaQuyenHoc).HasColumnType("bigint").IsRequired().ValueGeneratedOnAdd();
+            e.Property(x => x.MaHocVien).HasColumnType("nvarchar(128)").IsRequired();
+            e.Property(x => x.MaKhoaHoc).HasColumnType("int").IsRequired();
+            e.Property(x => x.MaDonHang).HasColumnType("bigint").IsRequired();
+            e.Property(x => x.NgayCap).HasColumnType("datetime2").IsRequired();
+            e.Property(x => x.NguonCap).HasColumnType("varchar(20)").IsRequired();
+            e.Property(x => x.NguoiCapId).HasColumnType("nvarchar(128)");
+            e.Property(x => x.GhiChu).HasColumnType("nvarchar(1000)");
+        });
+        b.Entity<HoanThanhBaiGiang>(e =>
+        {
+            e.ToTable("HoanThanhBaiGiang", "dbo");
+            // Dùng khóa ghép để mỗi học viên có một bản ghi hoàn thành cho mỗi bài.
+            e.HasKey(x => new { x.MaHocVien, x.MaBaiGiang });
+            e.Property(x => x.MaHocVien).HasColumnType("nvarchar(128)").IsRequired().ValueGeneratedNever();
+            e.Property(x => x.MaBaiGiang).HasColumnType("int").IsRequired().ValueGeneratedNever();
+            e.Property(x => x.MaKhoaHoc).HasColumnType("int").IsRequired();
+            e.Property(x => x.TruyCapDauLuc).HasColumnType("datetime2").IsRequired();
+            e.Property(x => x.TruyCapCuoiLuc).HasColumnType("datetime2").IsRequired();
+            e.Property(x => x.DaHoanThanh).HasColumnType("bit").IsRequired();
+            e.Property(x => x.HoanThanhLuc).HasColumnType("datetime2");
+        });
+        OnModelCreatingPartial(b);
     }
-
-    public virtual DbSet<BaiGiang> BaiGiang { get; set; }
-
-    public virtual DbSet<ChuongHoc> ChuongHoc { get; set; }
-
-    public virtual DbSet<KhoaHoc> KhoaHoc { get; set; }
-
-    public virtual DbSet<NgonNguLapTrinh> NgonNguLapTrinh { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<BaiGiang>(entity =>
-        {
-            entity.HasKey(e => e.MaBaiGiang);
-
-            entity.HasIndex(e => new { e.MaKhoaHoc, e.BatBuoc }, "IX_BaiGiang_KhoaHoc");
-
-            entity.HasIndex(e => new { e.MaBaiGiang, e.MaKhoaHoc }, "UQ_BaiGiang_KhoaHoc").IsUnique();
-
-            entity.HasIndex(e => new { e.MaChuong, e.ThuTu }, "UQ_BaiGiang_ThuTu").IsUnique();
-
-            entity.Property(e => e.BatBuoc).HasDefaultValue(true);
-            entity.Property(e => e.DuongDanVideo).HasMaxLength(500);
-            entity.Property(e => e.NgayTao).HasDefaultValueSql("(sysutcdatetime())");
-            entity.Property(e => e.NoiDung).HasDefaultValue("");
-            entity.Property(e => e.RowVersion)
-                .IsRowVersion()
-                .IsConcurrencyToken();
-            entity.Property(e => e.TenBaiGiang).HasMaxLength(150);
-
-            entity.HasOne(d => d.ChuongHoc).WithMany(p => p.BaiGiang)
-                .HasPrincipalKey(p => new { p.MaChuong, p.MaKhoaHoc })
-                .HasForeignKey(d => new { d.MaChuong, d.MaKhoaHoc })
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_BaiGiang_ChuongHoc");
-        });
-
-        modelBuilder.Entity<ChuongHoc>(entity =>
-        {
-            entity.HasKey(e => e.MaChuong);
-
-            entity.HasIndex(e => new { e.MaChuong, e.MaKhoaHoc }, "UQ_ChuongHoc_KhoaHoc").IsUnique();
-
-            entity.HasIndex(e => new { e.MaKhoaHoc, e.ThuTu }, "UQ_ChuongHoc_ThuTu").IsUnique();
-
-            entity.Property(e => e.TenChuong).HasMaxLength(150);
-
-            entity.HasOne(d => d.MaKhoaHocNavigation).WithMany(p => p.ChuongHoc)
-                .HasForeignKey(d => d.MaKhoaHoc)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ChuongHoc_KhoaHoc");
-        });
-
-        modelBuilder.Entity<KhoaHoc>(entity =>
-        {
-            entity.HasKey(e => e.MaKhoaHoc);
-
-            entity.HasIndex(e => e.NguoiTaoId, "IX_KhoaHoc_NguoiTao");
-
-            entity.HasIndex(e => new { e.HienThi, e.MaNgonNgu, e.TrinhDo }, "IX_KhoaHoc_TraCuu");
-
-            entity.Property(e => e.HinhDaiDien).HasMaxLength(500);
-            entity.Property(e => e.HocPhi).HasColumnType("decimal(18, 0)");
-            entity.Property(e => e.MoTaNgan).HasMaxLength(500);
-            entity.Property(e => e.NgayTao).HasDefaultValueSql("(sysutcdatetime())");
-            entity.Property(e => e.NguoiTaoId).HasMaxLength(128);
-            entity.Property(e => e.RowVersion)
-                .IsRowVersion()
-                .IsConcurrencyToken();
-            entity.Property(e => e.TenKhoaHoc).HasMaxLength(150);
-            entity.Property(e => e.TrinhDo).HasMaxLength(30);
-
-            entity.HasOne(d => d.MaNgonNguNavigation).WithMany(p => p.KhoaHoc)
-                .HasForeignKey(d => d.MaNgonNgu)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_KhoaHoc_NgonNgu");
-        });
-
-        modelBuilder.Entity<NgonNguLapTrinh>(entity =>
-        {
-            entity.HasKey(e => e.MaNgonNgu);
-
-            entity.HasIndex(e => e.MaJDoodle, "UQ_NgonNgu_JDoodle").IsUnique();
-
-            entity.HasIndex(e => e.TenNgonNgu, "UQ_NgonNgu_Ten").IsUnique();
-
-            entity.Property(e => e.DangHoatDong).HasDefaultValue(true);
-            entity.Property(e => e.MaJDoodle)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-            entity.Property(e => e.TenNgonNgu).HasMaxLength(50);
-        });
-
-        OnModelCreatingPartial(modelBuilder);
-    }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    partial void OnModelCreatingPartial(ModelBuilder b);
 }

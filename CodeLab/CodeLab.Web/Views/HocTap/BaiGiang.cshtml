@@ -1,0 +1,63 @@
+@* LessonPage gom nội dung, tài liệu và trạng thái của học viên để view dùng chung. *@
+@model LessonPage
+<section class="learning-page">
+<h1>@Model.Lesson.TenBaiGiang</h1>
+<article class="lesson">@Model.Lesson.NoiDung</article>
+@* Chọn nguồn phát. Video tải lên đi qua action Xem để máy chủ kiểm tra quyền. *@
+@{
+    string? videoSrc = null;
+    string? youtubeId = null;
+    var path = Model.Lesson.DuongDanVideo;
+    if (path?.StartsWith("video/") == true)
+    {
+        videoSrc = Url.Action("Xem", "Video", new { id = Model.Lesson.MaBaiGiang });
+    }
+    // Chỉ xử lý URL HTTPS và tách đường dẫn để nhận các kiểu link YouTube.
+    else if (Uri.TryCreate(path, UriKind.Absolute, out var url) && url.Scheme == "https")
+    {
+        var parts = url.AbsolutePath.Trim('/').Split('/');
+        if (url.Host == "youtu.be")
+        {
+            youtubeId = parts[0];
+        }
+        else if (url.Host is "youtube.com" or "www.youtube.com" or "m.youtube.com" or "www.youtube-nocookie.com")
+        {
+            // Link watch truyền mã video ở tham số v. Các kiểu còn lại đặt mã trong đường dẫn.
+            if (url.AbsolutePath == "/watch")
+                youtubeId = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(url.Query)["v"].ToString();
+            else if (parts.Length == 2 && parts[0] is ("embed" or "shorts" or "live"))
+                youtubeId = parts[1];
+        }
+        else
+        {
+            videoSrc = url.AbsoluteUri;
+        }
+    }
+}
+@* Kiểm tra mã video 11 ký tự rồi nhúng YouTube bằng iframe trong khung Bootstrap 16:9. *@
+@if (youtubeId != null && System.Text.RegularExpressions.Regex.IsMatch(youtubeId, @"\A[A-Za-z0-9_-]{11}\z"))
+{
+    <div class="ratio ratio-16x9 my-3">
+        <iframe src="https://www.youtube-nocookie.com/embed/@youtubeId"
+                title="Video bài giảng – @Model.Lesson.TenBaiGiang"
+                allowfullscreen></iframe>
+    </div>
+}
+else if (videoSrc != null)
+{
+    <video controls playsinline preload="metadata" class="w-100 my-3 bg-dark"
+           style="aspect-ratio:16/9" src="@videoSrc"></video>
+}
+else if (!string.IsNullOrWhiteSpace(path))
+{
+    <p class="text-muted">Đường dẫn video chưa hợp lệ.</p>
+}
+<h2>Tài liệu</h2>@foreach(var doc in Model.Documents){<p>
+<a asp-controller="TaiLieu" asp-action="TaiVe" asp-route-id="@doc.MaTaiLieu">@doc.TenTaiLieu</a>
+</p>}
+@if(Model.Completed){<p class="text-success">Đã hoàn thành bài giảng.</p>}else{<form method="post" asp-action="HoanThanh" asp-route-id="@Model.Lesson.MaBaiGiang">
+<button class="btn btn-primary">Đánh dấu đã học xong</button>
+</form>}<p class="mt-3">
+<a asp-controller="Home" asp-action="ChiTiet" asp-route-id="@Model.Lesson.MaKhoaHoc">Về khóa học</a>
+</p>
+</section>

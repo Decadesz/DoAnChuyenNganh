@@ -11,11 +11,11 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("40a3aae9-d297-45b0-b9da-a1a8129a99ad")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("CodeLab-ChinhThuc-Nhan")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeLab.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00308b57909ebb86cc7d62794af75cfbdf03c7cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeLab.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeLab.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

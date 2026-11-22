@@ -1,0 +1,12 @@
+@model BaiGiang
+<section class="editor">
+<h1>Video cho bài @Model.TenBaiGiang</h1>
+@* Kiểu gửi form này cho phép action nhận dữ liệu tệp qua IFormFile. *@
+<form asp-action="Them" asp-route-id="@Model.MaBaiGiang" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <label for="video">Chọn video MP4, tối đa 25 MB</label>
+    <input type="file" id="video" name="video" accept=".mp4" required class="form-control" />
+    <button class="btn btn-primary mt-3">Lưu video</button>
+    <a asp-controller="BaiGiang" asp-action="Index">Về danh sách bài giảng</a>
+</form>
+</section>

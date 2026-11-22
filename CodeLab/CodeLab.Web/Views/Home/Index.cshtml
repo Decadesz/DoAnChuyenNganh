@@ -1,24 +1,74 @@
-@model List<KhoaHoc>
+@{
+    var danhSach = (List<KhoaHoc>)ViewBag.DanhSach;
+    var ngonNgu = (List<NgonNguLapTrinh>)ViewBag.Languages;
+    var tuKhoa = Context.Request.Query["q"];
+    var luaChon = Context.Request.Query["language"];
+}
+
 <section class="hero">
-<div class="text-uppercase mb-2">Bắt đầu từ nền tảng</div>
-<h1>Khám phá khóa học.<br />Bắt đầu với lộ trình phù hợp.</h1>
-<p>Tìm hiểu nội dung và lộ trình các khóa học lập trình cho người mới.</p>
+    <div>
+        <h1>Bắt đầu học<br /> <span>lập trình.</span></h1>
+        <p>Chọn một ngôn ngữ, xem lộ trình và bắt đầu từ bài học phù hợp với bạn.</p>
+        <a href="#khoa-hoc" class="btn btn-primary">Khám phá khóa học <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="code-sample">
+        <figcaption><span aria-hidden="true">● ● ●</span> hello.py</figcaption>
+        <pre><code><span class="code-keyword">def</span> <span class="code-function">hello</span>(name):
+    <span class="code-keyword">return</span> <span class="code-string">f"Xin chào, {name}!"</span>
+
+<span class="code-function">print</span>(hello(<span class="code-string">"CodeLab"</span>))
+<span class="code-comment"># Xin chào, CodeLab!</span></code></pre>
+    </figure>
 </section>
-<form method="get" class="d-flex gap-2 mb-4">
-<input class="form-control" name="q" placeholder="Tìm khóa học…" value="@Context.Request.Query["q"]" />
-<select class="form-select" name="language">
-<option value="">Tất cả ngôn ngữ</option>@foreach(NgonNguLapTrinh n in ViewBag.Languages){<option value="@n.MaNgonNgu" selected="@(Context.Request.Query["language"]==n.MaNgonNgu.ToString())">@n.TenNgonNgu</option>}</select>
-<button class="btn btn-primary">Tìm</button>
-</form>
-@if(Model.Count==0){<div class="alert alert-info">Chưa có khóa học hiển thị phù hợp.</div>}
-<div class="row g-4">@foreach(var c in Model){<div class="col-md-6 col-lg-4">
-<article class="card h-100">
-<div class="card-body">
-<span class="badge bg-primary">@c.TrinhDo</span>
-<h2>@c.TenKhoaHoc</h2>
-<p>@c.MoTaNgan</p>
-<p class="fw-bold">@c.HocPhi.ToString("N0") đ</p>
-<a class="btn btn-outline-primary" asp-action="ChiTiet" asp-route-id="@c.MaKhoaHoc">Xem khóa học</a>
-</div>
-</article>
-</div>}</div>
+
+<section id="khoa-hoc" aria-labelledby="ten-danh-sach">
+    <div class="section-heading">
+        <h2 id="ten-danh-sach">Khóa học</h2>
+        <span class="result-count">@danhSach.Count khóa học</span>
+    </div>
+    <form asp-controller="Home" asp-action="Index" method="get" class="catalog-filter">
+        <input class="form-control" name="q" aria-label="Tên khóa học" placeholder="Tìm theo tên khóa học…" value="@tuKhoa" />
+        <select class="form-select" name="language" aria-label="Ngôn ngữ lập trình">
+            <option value="">Tất cả ngôn ngữ</option>
+            @foreach (var n in ngonNgu)
+            {
+                <option value="@n.MaNgonNgu" selected="@(luaChon == n.MaNgonNgu.ToString())">@n.TenNgonNgu</option>
+            }
+        </select>
+        <button class="btn btn-primary">Tìm khóa học</button>
+    </form>
+    @if (danhSach.Count == 0)
+    {
+        <div class="alert alert-info">Chưa có khóa học hiển thị phù hợp.</div>
+    }
+    <div class="row g-3">
+        @foreach (var c in danhSach)
+        {
+            var tenNgonNgu = ngonNgu.Find(n => n.MaNgonNgu == c.MaNgonNgu)?.TenNgonNgu;
+            <div class="col-md-6 col-lg-4">
+                <article class="card course-card h-100">
+                    @if (Uri.TryCreate(c.HinhDaiDien, UriKind.Absolute, out var imageUri) && imageUri.Scheme == "https")
+                    {
+                        <img src="@imageUri.AbsoluteUri" alt="Ảnh khóa học @c.TenKhoaHoc" class="card-img-top course-image" loading="lazy" referrerpolicy="no-referrer" />
+                    }
+                    <div class="card-body">
+                        <div class="course-tags">
+                            @if (tenNgonNgu != null)
+                            {
+                                <span class="language-tag">@tenNgonNgu</span>
+                            }
+                            <span>@c.TrinhDo</span>
+                        </div>
+                        <h3><a asp-action="ChiTiet" asp-route-id="@c.MaKhoaHoc">@c.TenKhoaHoc</a></h3>
+                        <p class="course-description">@c.MoTaNgan</p>
+                        <div class="course-meta">
+                            <strong>@(c.HocPhi == 0 ? "Miễn phí" : c.HocPhi.ToString("N0") + " đ")</strong>
+                            <span>@(c.MoBan ? "Đang mở bán" : "Chưa mở bán / tạm ngừng bán")</span>
+                        </div>
+                        <a class="btn btn-outline-primary" asp-action="ChiTiet" asp-route-id="@c.MaKhoaHoc">Xem khóa học <span aria-hidden="true">→</span></a>
+                    </div>
+                </article>
+            </div>
+        }
+    </div>
+</section>

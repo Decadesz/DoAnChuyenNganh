@@ -1,0 +1,25 @@
+@model List<ChuongHoc>
+<h1>Chương học</h1>
+<a class="btn btn-primary mb-3" asp-action="Edit">Thêm mới</a> <a asp-controller="QuanTri" asp-action="Index">Về quản trị</a>
+<div class="table-responsive">
+<table class="table">
+<thead>
+<tr>
+<th>Mã</th>
+<th>Khóa học</th>
+<th>Tên chương</th>
+<th>Thứ tự</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+<tbody>@foreach(var row in Model) { <tr>
+<td>@row.MaChuong</td>
+<td>@row.MaKhoaHoc</td>
+<td>@row.TenChuong</td>
+<td>@row.ThuTu</td>
+<td>
+<a asp-action="Edit" asp-route-id="@row.MaChuong">Sửa</a>
+</td>
+</tr>}</tbody>
+</table>
+</div>

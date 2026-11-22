@@ -1,0 +1,13 @@
+@model TrangThaiKhoaHocInput
+@{ ViewData["Title"] = "Trạng thái khóa học"; }
+<h1>Trạng thái khóa học</h1>
+<h2 class="h4">@ViewBag.CourseName</h2>
+<form method="post" asp-action="TrangThai" asp-route-id="@Model.MaKhoaHoc" class="editor mt-3">
+    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+    @* Gửi kèm phiên bản lúc mở form để phát hiện chỉnh sửa đồng thời. *@
+    <input type="hidden" asp-for="MaKhoaHoc" /><input type="hidden" asp-for="RowVersion" />
+    <div class="form-check mb-3"><input asp-for="HienThi" class="form-check-input" /><label asp-for="HienThi" class="form-check-label"></label></div>
+    <div class="form-check mb-3"><input asp-for="MoBan" class="form-check-input" /><label asp-for="MoBan" class="form-check-label"></label></div>
+    <p>Muốn mở bán, hãy bật cả hai lựa chọn. Muốn ẩn khóa học, hãy tắt cả hai. Đóng bán vẫn cho phép xem thông tin nếu đang bật hiển thị.</p>
+    <div><button class="btn btn-primary">Lưu trạng thái</button> <a asp-action="Index" class="btn btn-outline-secondary">Quay lại</a></div>
+</form>

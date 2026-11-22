@@ -12,6 +12,7 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        // Nạp cấu hình mặc định của các bảng Identity trước khi chỉnh theo SQL CodeLab.
         base.OnModelCreating(builder);
         builder.HasDefaultSchema("dbo");
 
@@ -32,6 +33,7 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<ApplicationUser>().Property(x => x.HoTen).HasMaxLength(100);
         builder.Entity<ApplicationUser>().Property(x => x.DaKhoa).HasDefaultValue(false);
         builder.Entity<ApplicationUser>().Property(x => x.NgayTao).HasDefaultValueSql("SYSUTCDATETIME()");
+        // Email đã chuẩn hóa được lập chỉ mục duy nhất cho các dòng có email.
         builder.Entity<ApplicationUser>().HasIndex(x => x.NormalizedEmail)
             .HasDatabaseName("EmailIndex").IsUnique().HasFilter("[NormalizedEmail] IS NOT NULL");
     }

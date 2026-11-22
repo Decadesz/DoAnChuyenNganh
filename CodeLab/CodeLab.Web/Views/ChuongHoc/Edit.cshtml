@@ -1,0 +1,31 @@
+@model ChuongHocInput
+<div class="editor">
+<h1>@(Model.MaChuong==0 ? "Thêm" : "Sửa") chương học</h1>
+<form method="post" asp-action="Edit" asp-route-id="@Model.MaChuong">
+<div asp-validation-summary="All">
+</div>
+<input type="hidden" asp-for="MaChuong" />
+<input type="hidden" asp-for="Version" />
+<div>
+<label asp-for="MaKhoaHoc"></label>
+<select class="form-select" asp-for="MaKhoaHoc" asp-items="ViewBag.Courses">
+<option value="">-- Chọn --</option>
+</select>
+<span asp-validation-for="MaKhoaHoc">
+</span>
+</div>
+<div>
+<label asp-for="TenChuong"></label>
+<input class="form-control" asp-for="TenChuong" />
+<span asp-validation-for="TenChuong">
+</span>
+</div>
+<div>
+<label asp-for="ThuTu"></label>
+<input class="form-control" asp-for="ThuTu" />
+<span asp-validation-for="ThuTu">
+</span>
+</div>
+<button class="btn btn-primary mt-4">Lưu</button> <a asp-action="Index" class="btn btn-outline-secondary mt-4">Quay lại</a>
+</form>
+</div>

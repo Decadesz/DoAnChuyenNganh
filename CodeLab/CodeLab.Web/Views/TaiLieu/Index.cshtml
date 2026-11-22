@@ -1,0 +1,16 @@
+@model List<TaiLieu>
+<section class="editor">
+<h1>Tài liệu bài giảng</h1>
+@* Kiểu gửi form này cho phép action nhận dữ liệu tệp qua IFormFile. *@
+<form method="post" enctype="multipart/form-data" asp-action="Upload" asp-route-id="@ViewBag.LessonId">
+<label for="title">Tên tài liệu</label>
+<input id="title" name="title" class="form-control" required maxlength="150" />
+<label for="file">Tệp tối đa 10 MB</label>
+<input id="file" name="file" type="file" class="form-control" required />
+<button class="btn btn-primary mt-3">Tải lên</button>
+</form>
+<hr />
+@foreach(var row in Model){<div class="card p-3 mb-2">
+<a asp-action="TaiVe" asp-route-id="@row.MaTaiLieu">@row.TenTaiLieu</a>
+</div>}
+</section>

@@ -1,0 +1,29 @@
+@model List<BaiGiang>
+<h1>Bài giảng</h1>
+<a class="btn btn-primary mb-3" asp-action="Edit">Thêm mới</a> <a asp-controller="QuanTri" asp-action="Index">Về quản trị</a>
+<div class="table-responsive">
+<table class="table">
+<thead>
+<tr>
+<th>Mã</th>
+<th>Chương</th>
+<th>Khóa học</th>
+<th>Tên bài giảng</th>
+<th>Cho học thử</th>
+<th>Bắt buộc</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+<tbody>@foreach(var row in Model) { <tr>
+<td>@row.MaBaiGiang</td>
+<td>@row.MaChuong</td>
+<td>@row.MaKhoaHoc</td>
+<td>@row.TenBaiGiang</td>
+<td>@row.HocThu</td>
+<td>@row.BatBuoc</td>
+<td>
+<a asp-controller="Video" asp-action="Them" asp-route-id="@row.MaBaiGiang">Video</a> · <a asp-controller="TaiLieu" asp-action="Index" asp-route-id="@row.MaBaiGiang">Tài liệu</a> <a asp-action="Edit" asp-route-id="@row.MaBaiGiang">Sửa</a>
+</td>
+</tr>}</tbody>
+</table>
+</div>

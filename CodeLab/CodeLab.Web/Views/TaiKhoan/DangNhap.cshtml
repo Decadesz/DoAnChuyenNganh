@@ -1,14 +1,15 @@
 @model LoginInput
-<div class="editor">
+<div class="editor auth-panel">
+<a class="brand" asp-controller="Home" asp-action="Index"><span aria-hidden="true">&gt;_</span> CodeLab</a>
 <h1>Đăng nhập</h1>
 <form method="post" asp-action="DangNhap">
 <div asp-validation-summary="All">
 </div> <input asp-for="ReturnUrl" type="hidden" />
-<label asp-for="Email">Email</label>
+<label asp-for="Email"></label>
 <input class="form-control" asp-for="Email" />
 <span asp-validation-for="Email">
 </span>
-<label asp-for="Password">Mật khẩu</label>
+<label asp-for="Password"></label>
 <input class="form-control" asp-for="Password" />
 <span asp-validation-for="Password">
 </span>
