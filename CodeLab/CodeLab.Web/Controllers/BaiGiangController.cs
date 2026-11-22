@@ -22,7 +22,26 @@ public class BaiGiangController : Controller
 
     // async/await chờ thao tác I/O hoàn thành mà không giữ luồng xử lý trong lúc chờ.
     // Truy vấn chỉ đọc dùng AsNoTracking để EF Core không theo dõi thay đổi của dữ liệu trả về.
-    public async Task<IActionResult> Index() => View(await db.BaiGiang.AsNoTracking().OrderBy(x => x.MaKhoaHoc).ThenBy(x => x.MaChuong).ThenBy(x => x.ThuTu).ToListAsync());
+    public async Task<IActionResult> Index()
+    {
+        ViewBag.TenKhoaHoc = await db.KhoaHoc
+            .AsNoTracking()
+            .ToDictionaryAsync(k => k.MaKhoaHoc, k => k.TenKhoaHoc);
+
+        // Tạo bảng tra: mã chương → tên chương.
+        ViewBag.TenChuong = await db.ChuongHoc
+            .AsNoTracking()
+            .ToDictionaryAsync(c => c.MaChuong, c => c.TenChuong);
+
+        var danhSach = await db.BaiGiang
+            .AsNoTracking()
+            .OrderBy(b => b.MaKhoaHoc)
+            .ThenBy(b => b.MaChuong)
+            .ThenBy(b => b.ThuTu)
+            .ToListAsync();
+
+        return View(danhSach);
+    }
     public async Task<IActionResult> Edit(int id = 0)
     {
         await Lists();

@@ -3,12 +3,40 @@
   "WorkspaceRootPath": "G:\\DoAn\\CodeLab\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\home\\chitiet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\home\\chitiet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\baigiang\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\baigiang\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\controllers\\baigiangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\controllers\\baigiangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\chuonghoc\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\chuonghoc\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\controllers\\chuonghoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\controllers\\chuonghoccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\viewmodels\\chuonghocinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\viewmodels\\chuonghocinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\models\\generated\\chuonghoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\models\\generated\\chuonghoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\home\\chitiet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\home\\chitiet.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\data\\generated\\codelabcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\data\\generated\\codelabcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,17 +46,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "CodeLab.Web\\Views\\Home\\Index.cshtml",
               "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "CodeLab.Web\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADMAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAADMAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-11-15T09:27:50.679Z",
               "IsPinned": true,
@@ -36,7 +64,98 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaiGiangController.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\BaiGiangController.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Controllers\\BaiGiangController.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\BaiGiangController.cs",
+              "RelativeToolTip": "CodeLab.Web\\Controllers\\BaiGiangController.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAwwCsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T14:44:35.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChuongHocController.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\ChuongHocController.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Controllers\\ChuongHocController.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\ChuongHocController.cs",
+              "RelativeToolTip": "CodeLab.Web\\Controllers\\ChuongHocController.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T14:37:28.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChuongHocInput.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
+              "RelativeToolTip": "CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T14:35:49.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\BaiGiang\\Index.cshtml",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Views\\BaiGiang\\Index.cshtml",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\BaiGiang\\Index.cshtml",
+              "RelativeToolTip": "CodeLab.Web\\Views\\BaiGiang\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-22T14:33:11.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ChuongHoc.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Models\\Generated\\ChuongHoc.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Models\\Generated\\ChuongHoc.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Models\\Generated\\ChuongHoc.cs",
+              "RelativeToolTip": "CodeLab.Web\\Models\\Generated\\ChuongHoc.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T14:32:10.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\ChuongHoc\\Index.cshtml",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Views\\ChuongHoc\\Index.cshtml",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\ChuongHoc\\Index.cshtml",
+              "RelativeToolTip": "CodeLab.Web\\Views\\ChuongHoc\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-22T14:31:58.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CodeLabContext.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Data\\Generated\\CodeLabContext.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Data\\Generated\\CodeLabContext.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Data\\Generated\\CodeLabContext.cs",
+              "RelativeToolTip": "CodeLab.Web\\Data\\Generated\\CodeLabContext.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-22T14:30:05.316Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ChiTiet.cshtml",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\Home\\ChiTiet.cshtml",
               "RelativeDocumentMoniker": "CodeLab.Web\\Views\\Home\\ChiTiet.cshtml",

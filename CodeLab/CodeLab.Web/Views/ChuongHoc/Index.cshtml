@@ -1,4 +1,7 @@
 @model List<ChuongHoc>
+@{
+    var tenKhoaHoc = (Dictionary<int, string>)ViewBag.TenKhoaHoc;
+}
 <h1>Chương học</h1>
 <a class="btn btn-primary mb-3" asp-action="Edit">Thêm mới</a> <a asp-controller="QuanTri" asp-action="Index">Về quản trị</a>
 <div class="table-responsive">
@@ -14,7 +17,7 @@
 </thead>
 <tbody>@foreach(var row in Model) { <tr>
 <td>@row.MaChuong</td>
-<td>@row.MaKhoaHoc</td>
+<td>@tenKhoaHoc.GetValueOrDefault(row.MaKhoaHoc, "Chưa rõ khóa học")</td>
 <td>@row.TenChuong</td>
 <td>@row.ThuTu</td>
 <td>
