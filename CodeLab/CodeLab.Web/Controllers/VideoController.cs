@@ -34,17 +34,24 @@ public class VideoController : Controller
         return bai == null ? NotFound() : View(bai);
     }
 
-    [HttpPost, Authorize(Roles = "Admin"), RequestSizeLimit(29_000_000)]
+    private const long DungLuongVideoToiDa = 2_000_000_000L;
+    private const long DungLuongRequestToiDa = 2_010_000_000L;
+
+    [HttpPost, Authorize(Roles = "Admin")]
+    [RequestSizeLimit(DungLuongRequestToiDa)]
+    [RequestFormLimits(MultipartBodyLengthLimit = DungLuongRequestToiDa)]
     // IFormFile là tệp ASP.NET Core nhận từ form multipart/form-data. Yêu cầu có giới hạn kích thước.
     public async Task<IActionResult> Them(int id, IFormFile? video)
     {
         var bai = await db.BaiGiang.FindAsync(id);
         if (bai == null) return NotFound();
 
-        if (video == null || video.Length == 0 || video.Length > 25_000_000 ||
-            !string.Equals(Path.GetExtension(video.FileName), ".mp4", StringComparison.OrdinalIgnoreCase))
+        if (video == null || video.Length == 0 ||
+            video.Length > DungLuongVideoToiDa ||
+            !string.Equals(Path.GetExtension(video.FileName), ".mp4",
+                StringComparison.OrdinalIgnoreCase))
         {
-            ModelState.AddModelError("", "Chọn video MP4 tối đa 25 MB.");
+            ModelState.AddModelError("", "Chọn video MP4 tối đa 2 GB.");
             return View(bai);
         }
         Directory.CreateDirectory(ThuMuc);

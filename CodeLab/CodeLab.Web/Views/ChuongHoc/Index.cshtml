@@ -1,9 +1,41 @@
 @model List<ChuongHoc>
 @{
     var tenKhoaHoc = (Dictionary<int, string>)ViewBag.TenKhoaHoc;
+    var maKhoaHocDaChon = (int?)ViewBag.MaKhoaHocDaChon;
 }
 <h1>Chương học</h1>
 <a class="btn btn-primary mb-3" asp-action="Edit">Thêm mới</a> <a asp-controller="QuanTri" asp-action="Index">Về quản trị</a>
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-md-5">
+        <label for="tuKhoa" class="form-label">Từ khóa</label>
+        <input type="search" id="tuKhoa" name="tuKhoa"
+               class="form-control" value="@ViewBag.TuKhoa"
+               placeholder="Nhập tên chương hoặc tên khóa học" />
+    </div>
+
+    <div class="col-md-4">
+        <label for="maKhoaHoc" class="form-label">Khóa học</label>
+        <select id="maKhoaHoc" name="maKhoaHoc" class="form-select">
+            <option value="">Tất cả khóa học</option>
+            @foreach (var khoa in tenKhoaHoc.OrderBy(khoa => khoa.Value))
+            {
+                <option value="@khoa.Key" selected="@(maKhoaHocDaChon == khoa.Key)">
+                    @khoa.Value
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-3 d-flex align-items-end gap-2">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Bỏ lọc</a>
+    </div>
+</form>
+
+@if (Model.Count == 0)
+{
+    <p class="alert alert-info">Không tìm thấy chương học phù hợp.</p>
+}
 <div class="table-responsive">
 <table class="table">
 <thead>

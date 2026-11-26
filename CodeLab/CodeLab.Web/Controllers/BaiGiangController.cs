@@ -22,22 +22,43 @@ public class BaiGiangController : Controller
 
     // async/await chờ thao tác I/O hoàn thành mà không giữ luồng xử lý trong lúc chờ.
     // Truy vấn chỉ đọc dùng AsNoTracking để EF Core không theo dõi thay đổi của dữ liệu trả về.
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? tuKhoa, int? maKhoaHoc)
     {
-        ViewBag.TenKhoaHoc = await db.KhoaHoc
-            .AsNoTracking()
-            .ToDictionaryAsync(k => k.MaKhoaHoc, k => k.TenKhoaHoc);
+        var query = db.BaiGiang.AsNoTracking();
 
-        // Tạo bảng tra: mã chương → tên chương.
-        ViewBag.TenChuong = await db.ChuongHoc
-            .AsNoTracking()
-            .ToDictionaryAsync(c => c.MaChuong, c => c.TenChuong);
+        if (maKhoaHoc.HasValue)
+        {
+            query = query.Where(bai => bai.MaKhoaHoc == maKhoaHoc.Value);
+        }
 
-        var danhSach = await db.BaiGiang
-            .AsNoTracking()
-            .OrderBy(b => b.MaKhoaHoc)
-            .ThenBy(b => b.MaChuong)
-            .ThenBy(b => b.ThuTu)
+        var tuKhoaTim = tuKhoa?.Trim() ?? "";
+
+        if (tuKhoaTim.Length > 0)
+        {
+            query = query.Where(bai =>
+                bai.TenBaiGiang.Contains(tuKhoaTim) ||
+                db.ChuongHoc.Any(chuong =>
+                    chuong.MaChuong == bai.MaChuong &&
+                    chuong.MaKhoaHoc == bai.MaKhoaHoc &&
+                    chuong.TenChuong.Contains(tuKhoaTim)) ||
+                db.KhoaHoc.Any(khoa =>
+                    khoa.MaKhoaHoc == bai.MaKhoaHoc &&
+                    khoa.TenKhoaHoc.Contains(tuKhoaTim)));
+        }
+
+        ViewBag.TenKhoaHoc = await db.KhoaHoc.AsNoTracking()
+            .ToDictionaryAsync(khoa => khoa.MaKhoaHoc, khoa => khoa.TenKhoaHoc);
+
+        ViewBag.TenChuong = await db.ChuongHoc.AsNoTracking()
+            .ToDictionaryAsync(chuong => chuong.MaChuong, chuong => chuong.TenChuong);
+
+        ViewBag.TuKhoa = tuKhoaTim;
+        ViewBag.MaKhoaHocDaChon = maKhoaHoc;
+
+        var danhSach = await query
+            .OrderBy(bai => bai.MaKhoaHoc)
+            .ThenBy(bai => bai.MaChuong)
+            .ThenBy(bai => bai.ThuTu)
             .ToListAsync();
 
         return View(danhSach);

@@ -40,7 +40,7 @@ public class KhoaHocController : Controller
         };
         // Tạo bảng tra tên ngôn ngữ theo mã để view lấy tên cho từng khóa.
         ViewBag.Languages = await db.NgonNguLapTrinh.AsNoTracking().ToDictionaryAsync(x => x.MaNgonNgu, x => x.TenNgonNgu);
-        return View(await query.OrderByDescending(x => x.MaKhoaHoc).ToListAsync());
+        return View(await query.OrderBy(x => x.TenKhoaHoc).ToListAsync());
     }
 
     public async Task<IActionResult> Create()

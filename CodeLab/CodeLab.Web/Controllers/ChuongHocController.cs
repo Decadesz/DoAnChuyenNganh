@@ -22,17 +22,35 @@ public class ChuongHocController : Controller
 
     // async/await chờ thao tác I/O hoàn thành mà không giữ luồng xử lý trong lúc chờ.
     // Truy vấn chỉ đọc dùng AsNoTracking để EF Core không theo dõi thay đổi của dữ liệu trả về.
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? tuKhoa, int? maKhoaHoc)
     {
-        // Tạo bảng tra: mã khóa học → tên khóa học.
-        ViewBag.TenKhoaHoc = await db.KhoaHoc
-            .AsNoTracking()
-            .ToDictionaryAsync(k => k.MaKhoaHoc, k => k.TenKhoaHoc);
+        var query = db.ChuongHoc.AsNoTracking();
 
-        var danhSach = await db.ChuongHoc
-            .AsNoTracking()
-            .OrderBy(c => c.MaKhoaHoc)
-            .ThenBy(c => c.ThuTu)
+        if (maKhoaHoc.HasValue)
+        {
+            query = query.Where(chuong => chuong.MaKhoaHoc == maKhoaHoc.Value);
+        }
+
+        var tuKhoaTim = tuKhoa?.Trim() ?? "";
+
+        if (tuKhoaTim.Length > 0)
+        {
+            query = query.Where(chuong =>
+                chuong.TenChuong.Contains(tuKhoaTim) ||
+                db.KhoaHoc.Any(khoa =>
+                    khoa.MaKhoaHoc == chuong.MaKhoaHoc &&
+                    khoa.TenKhoaHoc.Contains(tuKhoaTim)));
+        }
+
+        ViewBag.TenKhoaHoc = await db.KhoaHoc.AsNoTracking()
+            .ToDictionaryAsync(khoa => khoa.MaKhoaHoc, khoa => khoa.TenKhoaHoc);
+
+        ViewBag.TuKhoa = tuKhoaTim;
+        ViewBag.MaKhoaHocDaChon = maKhoaHoc;
+
+        var danhSach = await query
+            .OrderBy(chuong => chuong.MaKhoaHoc)
+            .ThenBy(chuong => chuong.ThuTu)
             .ToListAsync();
 
         return View(danhSach);
