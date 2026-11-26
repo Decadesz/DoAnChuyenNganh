@@ -63,6 +63,10 @@ public class BaiGiangController : Controller
         await Lists(input.MaKhoaHoc);
         if (id != input.MaBaiGiang)
             return BadRequest();
+        if (id != 0 && input.ThuTu is null)
+        {
+            ModelState.AddModelError(nameof(input.ThuTu), "Vui lòng nhập thứ tự.");
+        }
         if (!ModelState.IsValid)
             return View(input);
         var row = id == 0 ? new BaiGiang() : await db.BaiGiang.FindAsync(id);
@@ -102,7 +106,11 @@ public class BaiGiangController : Controller
         row.HocThu = input.HocThu;
         row.BatBuoc = input.BatBuoc;
         row.HienThi = input.HienThi;
-        row.ThuTu = input.ThuTu;
+        row.ThuTu = id == 0
+            ? (await db.BaiGiang
+                .Where(x => x.MaChuong == row.MaChuong)
+                .MaxAsync(x => (int?)x.ThuTu) ?? 0) + 1
+            : input.ThuTu.GetValueOrDefault();
         if (id == 0)
             row.NgayTao = DateTime.UtcNow;
         else

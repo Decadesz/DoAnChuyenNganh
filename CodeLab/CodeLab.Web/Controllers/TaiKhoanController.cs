@@ -28,45 +28,105 @@ public class TaiKhoanController : Controller
             return View(input);
         // Tìm tài khoản qua Identity rồi kiểm tra cờ khóa do quản trị viên đặt.
         var user = await users.FindByEmailAsync(input.Email.Trim());
-        if (user != null && !user.DaKhoa)
+        if (user != null)
         {
+            if(user.DaKhoa==true)
+            {
+                ModelState.AddModelError("", "Tài khoản đang bị khóa.");
+                return View(input);
+            }
             // Identity kiểm tra mật khẩu và cấp cookie. false là phiên trình duyệt, true bật đếm lần sai để khóa tạm.
             var r = await signIn.PasswordSignInAsync(user, input.Password, false, true);
             if (r.Succeeded)
                 // Chỉ quay về địa chỉ trong CodeLab để tránh chuyển hướng đến trang bên ngoài.
-                return Url.IsLocalUrl(input.ReturnUrl) ? LocalRedirect(input.ReturnUrl!) : RedirectToAction("Index", "Home");
-        }
-        ModelState.AddModelError("", "Thông tin đăng nhập không đúng hoặc tài khoản đang bị khóa.");
-        return View(input);
-    }
-    public IActionResult DangKy() => View(new RegisterInput());
-    [HttpPost, EnableRateLimiting("login")]
-    public async Task<IActionResult> DangKy(RegisterInput input)
-    {
-        if (!ModelState.IsValid)
-            return View(input);
-        var u = new ApplicationUser { UserName = input.Email.Trim(), Email = input.Email.Trim(), HoTen = input.HoTen.Trim() };
-        // Identity tự băm mật khẩu khi tạo tài khoản.
-        var r = await users.CreateAsync(u, input.Password);
-        if (r.Succeeded)
-        {
-            // Tài khoản tự đăng ký chỉ nhận vai trò HocVien.
-            var role = await users.AddToRoleAsync(u, "HocVien");
-            if (!role.Succeeded)
+            return Url.IsLocalUrl(input.ReturnUrl) ? LocalRedirect(input.ReturnUrl!) : RedirectToAction("Index", "Home");
+            else
             {
-                // Nếu gán vai trò thất bại, xóa tài khoản vừa tạo để tránh bỏ lại tài khoản thiếu quyền.
-                await users.DeleteAsync(u);
-                ModelState.AddModelError("", "Chưa có vai trò HocVien. Kiểm tra SQL khởi tạo.");
+                ModelState.AddModelError("", "Thông tin đăng nhập không đúng.");
                 return View(input);
             }
-            // Cấp cookie để học viên đăng nhập ngay sau khi đăng ký.
-            await signIn.SignInAsync(u, false);
-            return RedirectToAction("Index", "Home");
         }
-        foreach (var e in r.Errors)
-            ModelState.AddModelError("", e.Description);
+        else
+        {
+            ModelState.AddModelError("", "Thông tin đăng nhập không đúng.");
+            return View(input);
+        }
+    }
+    public IActionResult DangKy() => View(new RegisterInput());
+
+[HttpPost, EnableRateLimiting("login")]
+public async Task<IActionResult> DangKy(RegisterInput input)
+{
+    if (!ModelState.IsValid)
+        return View(input);
+
+    var email = input.Email.Trim();
+    var user = new ApplicationUser
+    {
+        UserName = email,
+        Email = email,
+        HoTen = input.HoTen.Trim()
+    };
+
+    // Identity kiểm tra dữ liệu và băm mật khẩu khi tạo tài khoản.
+    var result = await users.CreateAsync(user, input.Password);
+
+    if (!result.Succeeded)
+    {
+        if (result.Errors.Any(e => e.Code == "DuplicateUserName"
+                                || e.Code == "DuplicateEmail"))
+        {
+            ModelState.AddModelError("", "Email này đã được đăng ký.");
+            return View(input);
+        }
+
+        foreach (var error in result.Errors)
+        {
+            if (error.Code == "PasswordTooShort")
+            {
+                int doDaiToiThieu = users.Options.Password.RequiredLength;
+                ModelState.AddModelError("", $"Mật khẩu phải có ít nhất {doDaiToiThieu} ký tự.");
+            }
+            else if (error.Code == "PasswordRequiresDigit")
+            {
+                ModelState.AddModelError("", "Mật khẩu phải có ít nhất một chữ số.");
+            }
+            else if (error.Code == "PasswordRequiresLower")
+            {
+                ModelState.AddModelError("", "Mật khẩu phải có ít nhất một chữ thường.");
+            }
+            else if (error.Code == "PasswordRequiresUpper")
+            {
+                ModelState.AddModelError("", "Mật khẩu phải có ít nhất một chữ hoa.");
+            }
+            else if (error.Code == "PasswordRequiresNonAlphanumeric")
+            {
+                ModelState.AddModelError("", "Mật khẩu phải có ít nhất một ký tự đặc biệt.");
+            }
+            else if (error.Code == "InvalidUserName" || error.Code == "InvalidEmail")
+            {
+                ModelState.AddModelError("", "Email không hợp lệ. Vui lòng kiểm tra lại.");
+            }
+            else
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+        }
+
         return View(input);
     }
+
+    var roleResult = await users.AddToRoleAsync(user, "HocVien");
+    if (!roleResult.Succeeded)
+    {
+        await users.DeleteAsync(user);
+        ModelState.AddModelError("", "Không thể hoàn tất đăng ký. Vui lòng thử lại sau.");
+        return View(input);
+    }
+
+    await signIn.SignInAsync(user, false);
+    return RedirectToAction("Index", "Home");
+}
     [Authorize, HttpPost]
     public async Task<IActionResult> DangXuat()
     {
@@ -88,7 +148,7 @@ public class TaiKhoanController : Controller
         var result = await users.ChangePasswordAsync(user, input.OldPassword, input.NewPassword);
         if (!result.Succeeded)
         {
-            foreach (var error in result.Errors) ModelState.AddModelError("", error.Description);
+            foreach (var error in result.Errors) ModelState.AddModelError("","Mật khẩu cũ không đúng!");
             return View(input);
         }
         // Refresh this login after Identity changes the password and security stamp.

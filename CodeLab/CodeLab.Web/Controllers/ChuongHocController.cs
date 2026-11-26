@@ -53,6 +53,10 @@ public class ChuongHocController : Controller
         await Lists();
         if (id != input.MaChuong)
             return BadRequest();
+        if (id != 0 && input.ThuTu is null)
+        {
+            ModelState.AddModelError(nameof(input.ThuTu), "Vui lòng nhập thứ tự.");
+        }
         if (!ModelState.IsValid)
             return View(input);
         var row = id == 0 ? new ChuongHoc() : await db.ChuongHoc.FindAsync(id);
@@ -67,7 +71,11 @@ public class ChuongHocController : Controller
 
         row.MaKhoaHoc = input.MaKhoaHoc;
         row.TenChuong = input.TenChuong;
-        row.ThuTu = input.ThuTu;
+        row.ThuTu = id == 0
+            ? (await db.ChuongHoc
+                .Where(x => x.MaKhoaHoc == row.MaKhoaHoc)
+                .MaxAsync(x => (int?)x.ThuTu) ?? 0) + 1
+            : input.ThuTu.GetValueOrDefault();
 
         if (!await db.KhoaHoc.AnyAsync(x => x.MaKhoaHoc == row.MaKhoaHoc))
         {

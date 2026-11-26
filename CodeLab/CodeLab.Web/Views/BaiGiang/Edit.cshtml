@@ -69,10 +69,17 @@
             </span>
         </div>
         <div>
-            <label asp-for="ThuTu"></label>
-            <input class="form-control" asp-for="ThuTu" />
-            <span asp-validation-for="ThuTu">
-            </span>
+            @if (dangSua)
+            {
+                <label asp-for="ThuTu"></label>
+                <input class="form-control" asp-for="ThuTu" />
+                <span asp-validation-for="ThuTu" class="text-danger"></span>
+            }
+            else
+            {
+                <div>Thứ tự</div>
+                <div class="form-text">Tự động xếp cuối chương học khi lưu.</div>
+            }
         </div>
         <button class="btn btn-primary mt-4">Lưu</button> <a asp-action="Index" class="btn btn-outline-secondary mt-4">Quay lại</a>
     </form>

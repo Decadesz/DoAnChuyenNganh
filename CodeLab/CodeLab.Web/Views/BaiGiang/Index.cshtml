@@ -14,7 +14,8 @@
 <th>Khóa học</th>
 <th>Tên bài giảng</th>
 <th>Cho học thử</th>
-<th>Bắt buộc</th>
+<th>Thứ tự</th>
+ <th>Bắt buộc</th>
 <th>Thao tác</th>
 </tr>
 </thead>
@@ -24,6 +25,7 @@
 <td>@tenKhoaHoc.GetValueOrDefault(row.MaKhoaHoc, "Chưa rõ khóa học")</td>
 <td>@row.TenBaiGiang</td>
 <td>@row.HocThu</td>
+ <td>@row.ThuTu</td>
 <td>@row.BatBuoc</td>
 <td>
 <a asp-controller="Video" asp-action="Them" asp-route-id="@row.MaBaiGiang">Video</a> · <a asp-controller="TaiLieu" asp-action="Index" asp-route-id="@row.MaBaiGiang">Tài liệu</a> <a asp-action="Edit" asp-route-id="@row.MaBaiGiang">Sửa</a>

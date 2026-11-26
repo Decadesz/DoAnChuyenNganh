@@ -18,7 +18,9 @@ public class ChuongHocInput
         get; set;
     }
     [Display(Name = "Tên chương")]
-    [Required, MaxLength(150)] public string TenChuong { get; set; } = "";
+    [Required, MaxLength(150)] 
+    public string TenChuong { get; set; } = "";
     [Display(Name = "Thứ tự")]
-    [Range(1, int.MaxValue)] public int ThuTu { get; set; } = 1;
+    [Range(1, int.MaxValue, ErrorMessage = "Thứ tự phải lớn hơn 0.")]
+    public int? ThuTu { get; set; }
 }

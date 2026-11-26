@@ -6,26 +6,42 @@
 </div>
 <input type="hidden" asp-for="MaChuong" />
 <input type="hidden" asp-for="Version" />
-<div>
-<label asp-for="MaKhoaHoc"></label>
-<select class="form-select" asp-for="MaKhoaHoc" asp-items="ViewBag.Courses">
-<option value="">-- Chọn --</option>
-</select>
-<span asp-validation-for="MaKhoaHoc">
-</span>
-</div>
+        <div>
+            <label asp-for="MaKhoaHoc"></label>
+
+            <select class="form-select"
+                    asp-for="MaKhoaHoc"
+                    asp-items="ViewBag.Courses"
+                    disabled="@(Model.MaChuong != 0)">
+                <option value="">-- Chọn --</option>
+            </select>
+
+            @if (Model.MaChuong != 0)
+            {
+                <input type="hidden" asp-for="MaKhoaHoc" id="MaKhoaHocHidden" />
+            }
+
+            <span asp-validation-for="MaKhoaHoc"></span>
+        </div>
 <div>
 <label asp-for="TenChuong"></label>
 <input class="form-control" asp-for="TenChuong" />
 <span asp-validation-for="TenChuong">
 </span>
 </div>
-<div>
-<label asp-for="ThuTu"></label>
-<input class="form-control" asp-for="ThuTu" />
-<span asp-validation-for="ThuTu">
-</span>
-</div>
+        <div>
+            @if (Model.MaChuong != 0)
+            {
+                <label asp-for="ThuTu"></label>
+                <input class="form-control" asp-for="ThuTu" />
+                <span asp-validation-for="ThuTu" class="text-danger"></span>
+            }
+            else
+            {
+                <div>Thứ tự</div>
+                <div class="form-text">Tự động xếp cuối khóa học khi lưu.</div>
+            }
+        </div>
 <button class="btn btn-primary mt-4">Lưu</button> <a asp-action="Index" class="btn btn-outline-secondary mt-4">Quay lại</a>
 </form>
 </div>

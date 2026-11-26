@@ -24,11 +24,13 @@ public class BaiGiangInput
         get; set;
     }
     [Display(Name = "Tên bài giảng")]
-    [Required, MaxLength(150)] public string TenBaiGiang { get; set; } = "";
+    [Required, MaxLength(150)] 
+    public string TenBaiGiang { get; set; } = "";
     [Display(Name = "Nội dung")]
     public string NoiDung { get; set; } = "";
     [Display(Name = "URL video HTTPS")]
-    [MaxLength(500)] public string? DuongDanVideo { get; set; } = "";
+    [MaxLength(500)] 
+    public string? DuongDanVideo { get; set; } = "";
     [Display(Name = "Cho học thử")]
     public bool HocThu
     {
@@ -42,5 +44,6 @@ public class BaiGiangInput
         get; set;
     }
     [Display(Name = "Thứ tự")]
-    [Range(1, int.MaxValue)] public int ThuTu { get; set; } = 1;
+    [Range(1, int.MaxValue, ErrorMessage = "Thứ tự phải lớn hơn 0.")]
+    public int? ThuTu { get; set; }
 }

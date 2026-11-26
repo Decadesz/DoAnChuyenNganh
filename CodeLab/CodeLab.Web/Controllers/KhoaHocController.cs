@@ -57,6 +57,7 @@ public class KhoaHocController : Controller
         // Bỏ giá trị mã khóa đã ghi nhận từ form tạo mới vì SQL sẽ sinh mã.
         ModelState.Remove(nameof(input.MaKhoaHoc));
         await ValidateInput(input);
+
         if (!ModelState.IsValid) return await Form(input);
         var course = new KhoaHoc
         {
