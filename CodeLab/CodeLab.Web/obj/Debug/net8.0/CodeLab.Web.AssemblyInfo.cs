@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeLab.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6efbbdfeaf9b85cbd157ffeee8cbc883c2370c2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f2e8243ef4b254bef17a2caf55766ca8dbac11a")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeLab.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeLab.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

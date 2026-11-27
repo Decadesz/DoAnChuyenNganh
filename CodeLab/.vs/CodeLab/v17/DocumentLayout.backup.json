@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "G:\\DoAn\\CodeLab\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\hoctap\\baigiang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\hoctap\\baigiang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\controllers\\videocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\controllers\\videocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\controllers\\hoctapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\controllers\\hoctapcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\services\\accessservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\services\\accessservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\views\\video\\them.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\views\\video\\them.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -17,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\viewmodels\\baigianginput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\viewmodels\\baigianginput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\controllers\\videocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|solutionrelative:codelab.web\\controllers\\videocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{108F87EB-4F37-4F67-B256-5F95EA79DD1E}|CodeLab.Web\\CodeLab.Web.csproj|g:\\doan\\codelab\\codelab.web\\controllers\\baigiangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,6 +59,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "BaiGiang.cshtml",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\HocTap\\BaiGiang.cshtml",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Views\\HocTap\\BaiGiang.cshtml",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\HocTap\\BaiGiang.cshtml",
+              "RelativeToolTip": "CodeLab.Web\\Views\\HocTap\\BaiGiang.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAE0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-11-27T09:27:56.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HocTapController.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\HocTapController.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Controllers\\HocTapController.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\HocTapController.cs",
+              "RelativeToolTip": "CodeLab.Web\\Controllers\\HocTapController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwB8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-27T09:19:22.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AccessService.cs",
+              "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Services\\AccessService.cs",
+              "RelativeDocumentMoniker": "CodeLab.Web\\Services\\AccessService.cs",
+              "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Services\\AccessService.cs",
+              "RelativeToolTip": "CodeLab.Web\\Services\\AccessService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-27T09:17:42.285Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Them.cshtml",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\Video\\Them.cshtml",
               "RelativeDocumentMoniker": "CodeLab.Web\\Views\\Video\\Them.cshtml",
@@ -59,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "AuthModels.cs",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\ViewModels\\AuthModels.cs",
               "RelativeDocumentMoniker": "CodeLab.Web\\ViewModels\\AuthModels.cs",
@@ -71,19 +122,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "VideoController.cs",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\VideoController.cs",
               "RelativeDocumentMoniker": "CodeLab.Web\\Controllers\\VideoController.cs",
               "ToolTip": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\VideoController.cs",
               "RelativeToolTip": "CodeLab.Web\\Controllers\\VideoController.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAwwBEAAABXAAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAIwGMAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-26T15:52:54.819Z"
+              "WhenOpened": "2026-11-26T15:52:54.819Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "BaiGiangInput.cs",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\ViewModels\\BaiGiangInput.cs",
               "RelativeDocumentMoniker": "CodeLab.Web\\ViewModels\\BaiGiangInput.cs",
@@ -95,7 +147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "BaiGiangController.cs",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Controllers\\BaiGiangController.cs",
               "RelativeDocumentMoniker": "CodeLab.Web\\Controllers\\BaiGiangController.cs",
@@ -107,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Index.cshtml",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\BaiGiang\\Index.cshtml",
               "RelativeDocumentMoniker": "CodeLab.Web\\Views\\BaiGiang\\Index.cshtml",
@@ -119,7 +171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "ChuongHocInput.cs",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
               "RelativeDocumentMoniker": "CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
@@ -127,12 +179,11 @@
               "RelativeToolTip": "CodeLab.Web\\ViewModels\\ChuongHocInput.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-26T15:44:30.618Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-26T15:44:30.618Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Index.cshtml",
               "DocumentMoniker": "G:\\DoAn\\CodeLab\\CodeLab.Web\\Views\\ChuongHoc\\Index.cshtml",
               "RelativeDocumentMoniker": "CodeLab.Web\\Views\\ChuongHoc\\Index.cshtml",

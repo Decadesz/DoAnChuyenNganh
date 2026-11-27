@@ -28,6 +28,7 @@ public class VideoController : Controller
     // Chỉ tài khoản có vai trò Admin mới truy cập được phần này.
     [Authorize(Roles = "Admin")]
     // async/await chờ thao tác I/O hoàn thành mà không giữ luồng xử lý trong lúc chờ.
+
     public async Task<IActionResult> Them(int id)
     {
         var bai = await db.BaiGiang.FindAsync(id);
@@ -88,13 +89,15 @@ public class VideoController : Controller
             System.IO.File.Delete(Path.Combine(ThuMuc, videoCu![6..]));
         return RedirectToAction("Index", "BaiGiang");
     }
-
+    [AllowAnonymous]
     public async Task<IActionResult> Xem(int id)
     {
         var bai = await db.BaiGiang.FindAsync(id);
         if (bai == null || !TepNoiBo(bai.DuongDanVideo)) return NotFound();
-        if (!User.IsInRole("Admin") && !await access.Lesson(User.FindFirstValue(ClaimTypes.NameIdentifier)!, id))
-            return Forbid();
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!User.IsInRole("Admin") && !await access.Lesson(userId, id))
+            return userId == null ? Challenge() : Forbid();
         var tep = Path.Combine(ThuMuc, bai.DuongDanVideo![6..]);
         if (!System.IO.File.Exists(tep)) return NotFound();
         // Cho phép trình duyệt yêu cầu từng đoạn byte để phát và tua video.

@@ -23,16 +23,28 @@ public class HocTapController : Controller
     // NameIdentifier là mã tài khoản do Identity đặt khi đăng nhập.
     private string U => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
     // async/await chờ thao tác I/O hoàn thành mà không giữ luồng xử lý trong lúc chờ.
+    [AllowAnonymous]
     public async Task<IActionResult> BaiGiang(int id)
     {
-        // Quản trị viên có thể xem trước. Học viên phải đạt điều kiện kiểm tra bài trong AccessService.
-        if (!User.IsInRole("Admin") && !await access.Lesson(U, id))
-            return Forbid();
-        var l = await db.BaiGiang.FindAsync(id);
-        if (l == null)
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!User.IsInRole("Admin") && !await access.Lesson(userId, id))
+            return userId == null ? Challenge() : Forbid();
+
+        var bai = await db.BaiGiang.FindAsync(id);
+        if (bai == null)
             return NotFound();
-        // Gom bài giảng, tài liệu và trạng thái hoàn thành để view nhận qua một Model.
-        return View(new LessonPage(l, await db.TaiLieu.Where(x => x.MaBaiGiang == id).ToListAsync(), await db.HoanThanhBaiGiang.AnyAsync(x => x.MaHocVien == U && x.MaBaiGiang == id && x.DaHoanThanh)));
+
+        var taiLieu = await db.TaiLieu
+            .Where(t => t.MaBaiGiang == id)
+            .ToListAsync();
+
+        bool daHoanThanh = userId != null && await db.HoanThanhBaiGiang
+            .AnyAsync(h => h.MaHocVien == userId &&
+                           h.MaBaiGiang == id &&
+                           h.DaHoanThanh);
+
+        return View(new LessonPage(bai, taiLieu, daHoanThanh));
     }
     [HttpPost]
     public async Task<IActionResult> HoanThanh(int id)
